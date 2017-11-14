@@ -11,7 +11,8 @@ if(!isset($eventos)){
 
 
        <div id="evento">
-           <table class="table table-bordered col-xs-12">
+
+           <table class="table table-bordered" style="width: 100%;">
                <thead>
                <tr>
                    <th>Detalhes</th>
@@ -24,7 +25,11 @@ if(!isset($eventos)){
                    <tr>
                        <td><?='<a href="" class="btn-modal" data-agenda="'.$this->enc($eve['id_agenda']).'" >'.ucwords($petshop->getNomePetShopById(['id_petshop'=>$eve['id_petshop']])).'</a>'?></td>
                        <td><?=date('d/m/y',strtotime($eve['dt_servico']))?></td>
-                       <td><button class="btn btn-danger btn-excluir" data-agenda="<?=$this->enc($eve['id_agenda'])?>">Excluir</button></td>
+                       <td>
+                           <button class="btn btn-danger btn-excluir" data-agenda="<?=$this->enc($eve['id_agenda'])?>"><i class="ion-trash-a"></i></button>
+                          <!-- <button class="btn btn-success" data-agenda="<?/*=$this->enc($eve['id_agenda'])*/?>"><i class="ion-checkmark"></i></button>-->
+                       </td>
+
 
                    </tr>
                <?php endforeach;?>
@@ -98,6 +103,5 @@ if(!isset($eventos)){
             }
         });
     });
-
 
 </script>

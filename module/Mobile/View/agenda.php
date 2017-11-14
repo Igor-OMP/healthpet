@@ -32,9 +32,11 @@
             </form>
             <br>
             <hr>
-            <h2 class="text-center">Eventos</h2>
-            <div id="eventos_pagination"></div>
+
         </div>
+
+        <h2 class="text-center">Eventos</h2>
+        <div id="eventos_pagination"></div>
     </div>
 </div>
 

@@ -50,7 +50,16 @@ abstract class Model
             $pdo->setBinds($post);
             $pdo->execute();
 
-            return $pdo->getTransition();
+           if( $pdo->getTransition()){
+                return $pdo->getTransition();
+            }else{
+               $error=[
+                   'error'=>true,
+                   'error_message'=>$pdo->getMsgError(),
+               ];
+
+               return $error;
+           }
 
         } catch (Exception $e) {
             echo ' Erro ao gravar dados no banco de dados. ' . $e->getMessage();

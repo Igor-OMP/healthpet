@@ -31,6 +31,9 @@
                     <li class="has-submenu">
                         <a href="/mobile"><i class="md md-home"></i> Home</a>
                     </li>
+                    <!--<li class="has-submenu">
+                        <a href="/#"><i class="ion ion-location"></i> PetShops</a>
+                    </li>-->
                     <li class="has-submenu">
                         <a href="/mobile/logout"><i class="md md-exit-to-app"></i> Sair</a>
                     </li>

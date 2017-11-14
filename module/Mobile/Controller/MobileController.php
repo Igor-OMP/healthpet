@@ -362,13 +362,36 @@ class MobileController extends Controller
 
     public function pet_delete(){
         if($this->hasMobileSession() && $this->isPost()){
+            $pilha=[];
+
             $post = $this->getPost();
             $post['id']= $this->dec($post['id']);
+            $agenda  = new AgendaModel();
+            $user_agenda = new UsuarioAgendaModel();
+
+            if($agenda->filtrar(['id_pet'=>$post['id']]) > 0){
+                /*Buscando todas as agendas relacionas ao pet*/
+                $data = $agenda->where(['id_pet'=>$post['id']],'id_agenda');
+                if(isset($data[0])){
+                    $agendas = $data;
+                }else{
+                    $agendas[]= $data;
+                }
+                #xd($agendas);
+                /*Apagando agendas da tabela usuario_agenda*/
+                foreach($agendas as $item){
+                    $pilha['usuario_agenda'][]=$user_agenda->exclui($item);
+                }
+                /*Apagando agendas da tabela agenda*/
+                foreach($agendas as $item){
+                    $pilha['agenda'][]=$agenda->exclui($item);
+                }
+            }
 
             $pet = new PetModel();
             $bool = $pet->exclui(['id_pet'=>$post['id']]);
 
-            if($bool){
+            if($bool && !is_array($bool)){
                 echo $this->enc('success');
                 die;
             }

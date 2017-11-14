@@ -6,5 +6,6 @@
 nbproject/*
 data/cache/*
 public/assets/cache/*
+public/img/*
 Documentacao/
 vendor/

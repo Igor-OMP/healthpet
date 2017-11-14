@@ -4,7 +4,7 @@
     <title>mobile Health Pet</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
+    <link href="/assets/plugins/fullcalendar/dist/fullcalendar.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/bootstrap.min.css')?>">
     <link rel="stylesheet" href="<?=base_url('assets/css/base-mobile.css')?>">
     <link rel="stylesheet" href="<?=base_url('assets/css/mobile/import.css')?>">
@@ -34,6 +34,11 @@
 <script type="text/javascript" src="<?= base_url('assets/js/angular.min.js')?>"></script>
 <script src="<?=base_url('assets/js/jquery-ui.min.js')?>"></script>
 <script src="<?= base_url('assets/plugins/bootstrap-sweetalert/sweet-alert.min.js')?>"></script>
+
+<script src="/assets/plugins/moment/moment.js"></script>
+<script src="/assets/plugins/fullcalendar/dist/fullcalendar.min.js"></script>
+<script src="/assets/pages/jquery.fullcalendar.js"></script>
+
 <!--MASCARAS-->
 <script src="<?=base_url('assets/js/jquery.mask.min.js')?>"></script>
 <script src="<?=base_url('assets/js/mask.js')?>"></script>
