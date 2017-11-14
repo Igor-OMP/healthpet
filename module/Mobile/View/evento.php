@@ -27,7 +27,7 @@ if(!isset($eventos)){
                        <td><?=date('d/m/y',strtotime($eve['dt_servico']))?></td>
                        <td>
                            <button class="btn btn-danger btn-excluir" data-agenda="<?=$this->enc($eve['id_agenda'])?>"><i class="ion-trash-a"></i></button>
-                          <!-- <button class="btn btn-success" data-agenda="<?/*=$this->enc($eve['id_agenda'])*/?>"><i class="ion-checkmark"></i></button>-->
+                           <button class="btn btn-success btn-confirm" data-agenda="<?=$this->enc($eve['id_agenda'])?>"><i class="ion-checkmark"></i></button>
                        </td>
 
 
@@ -74,8 +74,8 @@ if(!isset($eventos)){
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Sim, exclua!",
-            cancelButtonText: "Não, cancele!",
+            confirmButtonText: "excluir",
+            cancelButtonText: "cancelar",
             closeOnConfirm: false,
             closeOnCancel: false
         }, function (isConfirm) {
@@ -100,6 +100,45 @@ if(!isset($eventos)){
 
             } else {
                 swal("Cancelado", "Seu registro está seguro :)", "error");
+            }
+        });
+    });
+
+    $('.btn-confirm').click(function () {
+        var id= $(this).data('agenda');
+
+        swal({
+            title: "Você tem certeza?",
+            text: "Essa ação irá salvar esse registro  no cartão de vacina do banco de dados",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "salvar",
+            cancelButtonText: "cancele",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function (isConfirm) {
+            if (isConfirm) {
+                $.ajax({
+                    type:'POST',
+                    dataType:'text',
+                    url:'/mobile/save-cv',
+                    async:false,
+                    cache:false,
+                    data:{
+                        id:id
+                    },
+                    success: function(data){
+                       if(data=='<?=$this->enc('success')?>'){
+                           swal("Salvo!", "Seu registro foi salvo com sucesso.", "success");
+                           carregarEventos();
+                       }
+                    }
+
+                });
+
+            } else {
+                swal("Cancelado", "operação foi cancelada :)", "error");
             }
         });
     });

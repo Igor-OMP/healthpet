@@ -95,7 +95,7 @@ class PetController extends  Controller
         $this->hasIdentify();
         $id = $this->getPost();
 
-        #xd($id);
+
         if(!empty($id)){
             $id['id']= $this->dec($id['id']);
             $servico = new PetModel();
@@ -103,6 +103,7 @@ class PetController extends  Controller
             if($bool){
                 $this->addMessage(['status'=>'SUCCESS','msg'=>'Informações excluidas com sucesso']);
                 echo true;
+                die;
             }
         }else{
             $this->addMessage(['status'=>'DANGER','msg'=>'Informações não puderam ser excluídas.']);

@@ -4,7 +4,7 @@
 ;?>
 
 <div class="container">
-    <h1 class="text-center">Lista de Racas</h1>
+    <h1 class="text-center">Lista de Pets</h1>
     <div class="row" style="margin-bottom: 20px;">
         <div class="col-md-12">
 

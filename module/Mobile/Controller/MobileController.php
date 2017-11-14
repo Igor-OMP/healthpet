@@ -399,4 +399,84 @@ class MobileController extends Controller
         echo false;
     }
 
+    public function save_cv(){
+        if($this->hasMobileSession() && $this->isPost()){/*INIT IF 1*/
+            $post= $this->getPost();
+            $post['id']= $this->dec($post['id']);
+
+            $agenda  = new AgendaModel();
+            $cv = new CartaoVacinaModel();
+            $pet_cv = new PetCartaoModel();
+            if($agenda->filtrar(['id_agenda'=>$post['id']]) > 0){/*INIT IF 2*/
+                $bool = $agenda->salvar(['id_agenda'=>$post['id'],'flag_status'=>'I']);
+                #$bool = true;
+                if($bool){
+                    $agenda = $agenda->getById(['id_agenda'=>$post['id']]);
+                    $id_pet = $agenda['id_pet'];
+                    $id_cartao = $cv->salvar([
+                        'id_petshop'=>$agenda['id_petshop'],
+                        'id_servico'=>$agenda['id_servico'],
+                        'dt_evento'=>$agenda['dt_servico'],
+                        'txt_desc'=>json_encode(['observacoes'=>null])
+                    ]);
+                    if($id_cartao){
+                       $bool =  $pet_cv->salvar([
+                            'id_cartao_vacina'=>$id_cartao,
+                            'id_pet'=>$id_pet
+                        ]);
+
+                        if($bool){
+                            echo $this->enc('success');
+                            die;
+                        }
+                    }
+
+                }
+            }   /*END IF 2*/
+        }/*End IF 1*/
+
+        echo false;
+
+    }
+
+    public function card_vacina($params){
+
+        if($this->hasMobileSession() && !empty($params)){
+            $this->loadMobTemplate('card-vacina',['id_pet'=>$params]);
+        }else{
+            $this->toRoute('/mobile');
+        }
+    }
+    public function card_vacina_pagination(){
+        if($this->hasMobileSession() && $this->isPost()){
+            $post = $this->getPost();
+            $post['id']= $this->dec($post['id']);
+
+            $pet_cv = new PetCartaoModel();
+            $pet_cv = $pet_cv->getById(['id_pet'=>$post['id']]);
+
+            if(isset($pet_cv[0])){
+                $dados = $pet_cv;
+            }else{
+                $dados[]=$pet_cv;
+            }
+            $this->loadView('card-vacina-pagination',['cartoes'=>$dados,'id_pet'=>$post['id']]);
+        }
+    }
+
+
+    public function modal_card_vacina(){
+        $this->hasMobileIdentify();
+        if($this->isPost()){
+            $post = $this->getPost();
+            $post['id_cartao_vacina'] = $this->dec($post['id_cartao_vacina']);
+            $cv = new CartaoVacinaModel();
+
+            $data = $cv->where($post);
+            $this->data['dados']= $data;
+            $this->loadView('modal-card-vacina');
+        }else{
+            echo false;
+        }
+    }
 }

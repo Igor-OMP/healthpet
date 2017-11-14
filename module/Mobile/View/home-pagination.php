@@ -40,9 +40,10 @@ $objData = new DateTime('now');
                         <h5 class="text-muted m-t-20">Agenda</h5>
                         <h4 class="m-b-0 text-center"><a href="/mobile/agenda/<?=$this->enc($item['id_pet'])?>"><i class="ion-calendar"></i> </a></h4>
                     </li>
+
                     <li>
-                        <h5 class="text-muted m-t-20">Histórico</h5>
-                        <h4 class="m-b-0 text-center"><a href=""><i class="ion-ios7-medkit-outline"></i></a></h4>
+                        <h5 class="text-muted m-t-20">Cartão de Vacina</h5>
+                        <h4 class="m-b-0 text-center"><a href="/mobile/card-vacina/<?=$this->enc($item['id_pet'])?>"><i class="ion-ios7-medkit-outline"></i></a></h4>
                     </li>
                 </ul>
             </div>
