@@ -1,0 +1,9 @@
+#cad-pet{margin-top: 130px;}
+#cad-pet .btn-primary {
+    background-color: rgba(255, 153, 102, 1) !important;
+    border: 1px solid rgba(255, 153, 102, 1) !important;
+}
+
+@media (max-width:500px){
+    #cad-pet{margin-top: 60px;}
+}

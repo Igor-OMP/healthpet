@@ -1,0 +1,24 @@
+#datatable-buttons_filter label{
+    display: block !important;
+    width: 1000px !important;
+}
+#datatable-buttons_filter label input{
+    display: block !important;
+    width: 100%  !important;
+
+}
+#datatable-buttons_filter label input:focus{
+    border-color: #0b97c4;
+}
+
+::-webkit-input-placeholder {
+    color: #0a6aa1 !important;
+    font: 14px verdana, arial, sans-serif;
+    font-weight: 400;
+}
+:-moz-placeholder {
+    color: #0a6aa1 !important;
+    font: 14px verdana, arial, sans-serif;
+    font-weight: 900;
+}
+

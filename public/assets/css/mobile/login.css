@@ -1,0 +1,16 @@
+
+#login .logo-login{text-align: center;}
+#login .logo-login i{ font-size: 10em;color: #fff;}
+#login .form-horizontal{margin-top: 30px;}
+#login .form-horizontal label{color: #fff;}
+#login .form-horizontal button[type="submit"]{background-color: transparent;color: #fff;border: 2px solid #fff; padding: 10px 15px;}
+
+@media (min-height: 1024px){
+    #login .logo-login {margin-top:170px;}
+    #login .logo-login i{font-size: 5em;}
+    #login .form-horizontal{margin-top: 20px;}
+    #login .form-horizontal label{font-size: 3em;}
+    #login .form-horizontal input{height: 80px;margin-bottom: 40px;font-size:3em;}
+    #login .form-horizontal button[type="submit"]{height: 90px;font-size: 3.5em;}
+    #login a{font-size: 3em;margin-top: 120px; display: block;}
+}

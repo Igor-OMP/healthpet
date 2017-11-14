@@ -1,0 +1,8 @@
+#cad-user{margin-top:15px;}
+#cad-user form .alert-message{padding: 5px 5px; margin-top:1px;margin-bottom:-10px;color: #fff; font-weight: 500; letter-spacing: 2px;display: none;}
+#cad-user form .alert-message.active{display: block;}
+
+
+@media (max-width: 500px){
+    #cad-user{margin-top: 15px;}
+}

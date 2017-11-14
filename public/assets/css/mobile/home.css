@@ -1,0 +1,11 @@
+#home-main{margin-top: 140px; margin-bottom: 80px;}
+#home-main .card-box img{width: 90px;height: 132px;margin-left: -10px;}
+#home-main .btn-add{position: fixed; bottom: 90px;right:5px;background-color: rgba(255, 153, 102, 0.8) ; padding: 20px; border-radius:50%;  }
+#home-main .btn-add i{color: #fff;}
+#home-main .list-inline{margin-top: -10px;}
+#home-main .list-inline i{font-size: 1.4em;}
+#home-main .card-box .btn-pet-excluir{position: absolute;top:1px;right: 12px;}
+@media (max-width:992px){
+    #home-main{margin-top: 80px;}
+}
+

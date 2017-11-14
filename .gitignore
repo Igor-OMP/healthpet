@@ -1,0 +1,9 @@
+.idea/deployment.xml
+.idea/encodings.xml
+.idea/workspace.xml
+.idea/*
+/nbproject/private/
+nbproject/*
+data/cache/*
+public/assets/cache/*
+Documentacao/

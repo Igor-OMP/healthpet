@@ -1,0 +1,102 @@
+<?php
+/**
+ * Created by Igor Oliveira.
+ * User: https://github.com/Igor-Oliveira-Mota-Pires
+ * Date: 27/05/2017
+ * Time: 21:20
+ *
+ *
+ */
+
+return [
+    'login'=>[
+        'module'=>'Login',
+        'controller'=>'LoginController',
+        'model'=>'LoginModel',
+        'action_default'=>'login'
+    ],
+    'logout'=>[
+        'module'=>'Login',
+        'controller'=>'LoginController',
+        'model'=>'LoginModel',
+        'action_default'=>'logout'
+    ],
+
+    'loginadm'=>[
+        'module'=>'Login',
+        'controller'=>'LoginController',
+        'model'=>'LoginModel',
+        'action_default'=>'loginadm'
+    ],
+    'sing-in'=>[
+        'module'=>'Login',
+        'controller'=>'LoginController',
+        'model'=>'LoginModel',
+        'action_default'=>'login'
+    ],
+    'admin'=>[
+        'module'=>'Admin',
+        'controller'=>'AdminController',
+        'model'=>'AdminModel',
+        'action_default'=>'index'
+    ],
+    'usuario'=>[
+        'module'=>'Usuario',
+        'controller'=>'UsuarioController',
+        'model'=>'UsuarioModel',
+        'action_default'=>'index'
+    ],
+    'petshop'=>[
+        'module'=>'PetShop',
+        'controller'=>'PetShopController',
+        'model'=>'PetShopModel',
+        'action_default'=>'index'
+    ],
+    'servico'=>[
+        'module'=>'Servico',
+        'controller'=>'ServicoController',
+        'model'=>'ServicoModel',
+        'action_default'=>'index'
+    ],
+    'cidade'=>[
+        'module'=>'Cidade',
+        'controller'=>'CidadeController',
+        'model'=>'CidadeModel',
+        'action_default'=>'index'
+    ],
+    'raca'=>[
+        'module'=>'Raca',
+        'controller'=>'RacaController',
+        'model'=>'RacaModel',
+        'action_default'=>'index'
+    ],
+    'especie'=>[
+        'module'=>'Especie',
+        'controller'=>'EspecieController',
+        'model'=>'EspecieModel',
+        'action_default'=>'index'
+    ],
+    'pet'=>[
+        'module'=>'Pet',
+        'controller'=>'PetController',
+        'model'=>'PetModel',
+        'action_default'=>'index'
+    ],
+    'application'=>[
+        'module'=>'Application',
+        'controller'=>'ApplicationController',
+        'model'=>'ApplicationModel',
+        'action_default'=>'index'
+    ],
+    'mobile'=>[
+        'module'=>'Mobile',
+        'controller'=>'MobileController',
+        'model'=>'MobileModel',
+        'action_default'=>'index'
+    ],
+    'debug'=>[
+        'module'=>'Debug',
+        'controller'=>'DebugController',
+        'action_default'=>'getDebug'
+    ],
+];
