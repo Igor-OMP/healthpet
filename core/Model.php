@@ -29,8 +29,10 @@ abstract class Model
                 $objPdo = $pdo->getConnect();
                 $dados = $objPdo->lastInsertId();
             } else {
-                xd($pdo->getMsgError());
-
+                $dados=[
+                    'error'=>true,
+                    'error_message'=>$pdo->getMsgError(),
+                ];
             }
 
             return $dados;
@@ -89,12 +91,16 @@ abstract class Model
             $pdo->setBind($id);
             $pdo->execute();
 
-            if ($pdo->getQtd() > 0) {
-                $dados = $pdo->getQtd();
-                return $dados;
-            }
+            if( $pdo->getTransition()){
+                return $pdo->getTransition();
+            }else{
+                $error=[
+                    'error'=>true,
+                    'error_message'=>$pdo->getMsgError(),
+                ];
 
-            return $pdo->getMsgError();
+                return $error;
+            }
         } catch (Exception $e) {
             echo ' Erro ao gravar dados no banco de dados. ' . $e->getMessage();
         }

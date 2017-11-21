@@ -183,7 +183,7 @@ if(!$footer){ ?>
             time: 1200
         });
         $('.circliful-chart').circliful();
-        jQuery(document).tooltip();
+
     });
 
     // BEGIN SVG WEATHER ICON

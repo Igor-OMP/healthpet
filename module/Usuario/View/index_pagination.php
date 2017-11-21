@@ -109,6 +109,7 @@
                         },
                         success: function(data){
                             swal("Deletado!", "Seu arquivo foi deletado com sucesso.", "success");
+                            updateMessege();
                             carregarPagination();
                         }
 

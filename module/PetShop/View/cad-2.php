@@ -5,31 +5,32 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <?php
-            /**@var $form PetShopForm*/
-
             $form->createForm();
-            if(isset($dados) && !empty($dados)):
+
+            if(isset($data)){
+                xd($data);
+            }
             ?>
 
-            <form action="<?=base_url('petshop/atualizar')?>" method="post" style="margin-bottom: 50px;">
-                <?= $form->set('id_petshop')->setValue($dados['id_petshop'])->get()?>
+            <form action="<?=base_url('petshop/salvar')?>" method="post" style="margin-bottom: 50px;">
+
                 <fieldset>
                     <legend>Dados Básicos</legend>
                     <div class="form-group row">
                         <div class="col-md-4 col-md-offset-1">
                             <label for="nm_petshop">Nome PetShop:</label>
-                            <?= $form->set('nm_petshop')->setValue(ucwords($dados['nm_petshop']))->get()?>
+                            <?= $form->get('nm_petshop') ?>
                         </div>
                         <div class="col-md-1"></div>
                         <div class="col-md-4">
-                            <label for="nr_telefone">Telefone:</label>
-                            <?= $form->set('nr_telefone')->setValue($dados['nr_telefone'])->get()?>
+                            <label for="nm_petshop">Telefone:</label>
+                            <?= $form->get('nr_telefone') ?>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-4 col-md-offset-1">
-                            <label for="em_email">Email:</label>
-                            <?= $form->set('em_email')->setValue($dados['em_email'])->get() ?>
+                            <label for="nm_petshop">Email:</label>
+                            <?= $form->get('em_email') ?>
                         </div>
                         <div class="col-md-1"></div>
 
@@ -40,45 +41,44 @@
                     <legend>Dados de Localização</legend>
                     <div class="form-group row">
                         <div class="col-md-5 col-md-offset-1">
-                            <label for="nm_logradouro">Logradouro:</label>
-                            <?= $form->set('nm_logradouro')->setValue($dados['nm_logradouro'])->get() ?>
+                            <label for="nm_petshop">Logradouro:</label>
+                            <?= $form->get('nm_logradouro') ?>
                         </div>
                         <div class="col-md-1"></div>
                         <div class="col-md-3">
-                            <label for="nr_cep">CEP:</label>
-                            <?= $form->set('nr_cep')->setValue($dados['nr_cep'])->get() ?>
+                            <label for="nm_petshop">CEP:</label>
+                            <?= $form->get('nr_cep') ?>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-4 col-md-offset-1">
-                            <label for="nm_bairro">Bairro:</label>
-                            <?= $form->set('nm_bairro')->setValue($dados['nm_bairro'])->get() ?>
+                            <label for="nm_petshop">Bairro:</label>
+                            <?= $form->get('nm_bairro') ?>
                         </div>
                         <div class="col-md-1"></div>
                         <div class="col-md-4">
-                            <label for="id_cidade">Cidade:</label>
-                            <?= $form->set('id_cidade')->setValue($dados['id_cidade'])->get() ?>
+                            <label for="nm_petshop">Cidade:</label>
+                            <?= $form->get('id_cidade') ?>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-4 col-md-offset-1">
-                            <label for="nm_complemento">Complemento:</label>
-                            <?= $form->set('nm_complemento')->setValue($dados['nm_complemento'])->get() ?>
+                            <label for="nm_petshop">Complemento:</label>
+                            <?= $form->get('nm_complemento') ?>
                         </div>
                         <div class="col-md-1"></div>
                         <div class="col-md-4">
-                            <label for="nr_num">Número:</label>
-                            <?= $form->set('nr_num')->setValue($dados['nr_num'])->get() ?>
+                            <label for="nm_petshop">Número:</label>
+                            <?= $form->get('nr_num') ?>
                         </div>
                     </div>
                 </fieldset>
-
                 <fieldset>
                     <legend>Serviços Prestados</legend>
                     <div class="form-group row">
                         <div class="col-md-4 col-md-offset-1">
                             <label for="id_servico">Serviços:</label>
-                            <?= $form->set('id_servico')->setValue($dados['id_servico'])->get() ?>
+                            <?= $form->get('id_servico') ?>
                         </div>
                     </div>
                 </fieldset>
@@ -93,10 +93,6 @@
                     </div>
                 </div>
             </form>
-            <?php
-                    endif;
-            ?>
-
         </div>
     </div>
 </div>

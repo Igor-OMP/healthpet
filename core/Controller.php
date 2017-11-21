@@ -19,6 +19,10 @@ abstract class Controller
     protected static $add_text = "compremaisprojeto";
     protected $form;
 
+    const MSG_SUCCESS ='SUCCESS';
+    const MSG_DANGER ='DANGER';
+    const MSG_WARNING ='WARNING';
+    const MSG_INFO ='INFO';
     /**
      * Controller constructor.
      * @param $data
@@ -262,6 +266,22 @@ abstract class Controller
 
     }
 
+    public function addFlashMessage($status= Controller::MSG_SUCCESS,$msg = null )
+    {
+        session_start();
+        if (!isset($_SESSION['user'])) {
+            $this->route('/login');
+            #$this->route('');
+        }
+
+        $alert=[
+          'status'=>$status,
+          'msg'=>$msg
+        ];
+        $session = new Sessions();
+        $session->set_session_data('flash_message',['alert'=>$alert]);
+
+    }
 
     public function fabric($model = null)
     {

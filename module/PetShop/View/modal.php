@@ -25,9 +25,17 @@
                 <h3>Servicos</h3>
                 <?php
                     $servicos = $petserv->getServicosByPetShopId(['id_petshop'=>$dados['id_petshop']]);
-                    foreach($servicos as $value){
-                        echo $servico->getNomeServicoById($value).'<br>';
+
+                    if(!isset($servicos[0])){
+                        echo $servico->getNomeServicoById($servicos);
+                    }else{
+                        foreach($servicos as $value){
+
+                            echo $servico->getNomeServicoById($value).'<br>';
+                        }
                     }
+
+
                 ?>
             </div>
             <div class="modal-footer">

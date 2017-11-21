@@ -27,8 +27,14 @@ class FormBuilder extends \PFBC\Form
 
     }
 
-    public function get($element){
-        return $this->elements[$element]->render();
+    public function get($element,$option=FALSE){
+
+        if($option){
+           return $this->elements[$element];
+        }else{
+            $element = $this->elements[$element]->render();
+        }
+        return $element;
     }
 
     /**

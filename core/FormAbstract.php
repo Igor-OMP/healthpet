@@ -8,9 +8,13 @@
  */
 class FormAbstract
 {
-    /**@var FormBuilder*/
+    /** @var $form FormBuilder
+     * @var $element
+     */
     protected  $form;
     protected $elements;
+    protected $element;
+    protected $element_name;
 
     public function setData($data =[]){
         #xd($data);
@@ -22,9 +26,20 @@ class FormAbstract
       $this->form->setValues($data);
 
     }
+    public function set($name){
+        $this->element = $this->form->get($name,TRUE);
+        $this->element_name = $this->element->getAttribute('name');
+        return $this;
+    }
+    public function setValue($value){
+            $this->element->setAttribute("value",$value);
+            return $this;
+    }
+    public function get($element =null,$option = FALSE){
+        if($element ==null)
+            $element = $this->element_name;
 
-    public function get($element){
-        return $this->form->get($element);
+        return $this->form->get($element,$option);
     }
     public function render(){
         $this->form->render();

@@ -31,8 +31,8 @@
                     <td><?=$petshop['em_email'];?></td>
                     <td class="text-center"><button class="btn btn-default btn-rounded waves-effect waves-light m-t-10 btn-modal" data-info="<?=$this->enc($petshop['id_petshop'])?>">Detalhes</button></td>
                     <td class="text-center">
-                        <a href="<?=base_url('usuario/cadastrar/'.$this->enc($petshop['id_petshop']))?>" class="btn btn-warning">Editar</a>
-                        <a href="#" class="btn btn-danger" data-value="<?=$this->enc($petshop['id_petshop'])?>">Excluir</a>
+                        <a href="<?=base_url('petshop/cadastrar/'.$this->enc($petshop['id_petshop']))?>" class="btn btn-warning">Editar</a>
+                        <button class="btn btn-danger btn-excluir" data-value="<?=$this->enc($petshop['id_petshop'])?>">Excluir</button>
                     </td>
 
                 </tr>
@@ -107,4 +107,46 @@ $(".btn-modal").click(function(e){
     });
 
 });
+
+    /*BUTTON EXCLUIR*/
+    $('.btn-excluir').click(function (e) {
+        e.preventDefault();
+        var id= $(this).data('value');
+
+        swal({
+            title: "Você tem certeza?",
+            text: "Essa ação irá excluir esse registro do banco de dados",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Sim, exclua!",
+            cancelButtonText: "Não, cancele!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function (isConfirm) {
+            if (isConfirm) {
+                $.ajax({
+                    type:'POST',
+                    dataType:'text',
+                    url:'/petshop/excluir',
+                    async:false,
+                    cache:false,
+                    data:{
+                        id_petshop:id
+                    },
+                    success: function(data){
+                        swal("Deletado!", "Seu arquivo foi deletado com sucesso.", "success");
+                        updateMessege();
+                        carregarPagination();
+                    }
+
+                });
+
+            } else {
+                swal("Cancelado", "Seu arquivo está seguro :)", "error");
+            }
+        });
+    });
+
+
 </script>

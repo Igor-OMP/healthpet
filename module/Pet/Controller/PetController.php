@@ -34,11 +34,31 @@ class PetController extends  Controller
 
         if($params != null){
             $id = $this->dec($params);
-            $model = new RacaModel();
-            $data = $model->getById(['id_raca'=>$id]);
-            $data['id_raca'] = $this->enc($data['id_raca']);
+            $model = new PetModel();
+            $raca = new RacaModel();
 
+            $data = $model->getById(['id_pet'=>$id]);
+            $data['id_pet'] = $this->enc($data['id_pet']);
+            $data['dt_nasc'] = substr($data['dt_nasc'],0,stripos($data['dt_nasc']," "));
+            $espec =$raca->where(['id_raca'=>$data['id_raca']],'id_especie');
+            $data['id_especie']=$espec['id_especie'];
+
+
+            switch($data['flag_porte']){
+                case '1':
+                    $data['flag_porte']='Pequeno';
+                    break;
+                case '2':
+                    $data['flag_porte']='Médio';
+                    break;
+                case '3':
+                    $data['flag_porte']='Grande';
+                    break;
+            }
+            #xd($data);
             $this->form->setData($data);
+
+            $this->data['data']=$data;
         }
         $this->data['form']= $this->form;
         $this->loadTemplate('cad');
@@ -62,32 +82,51 @@ class PetController extends  Controller
         $this->hasIdentify();
 
         $post = $this->getPost();
-        if(isset($post['id_raca']) && $post['id_raca'] == null)
-            unset($post['id_raca']);
+
+        if(isset($post['id_pet']) && $post['id_pet'] == null)
+            unset($post['id_pet']);
 
 
         if(!empty($post)){
-            if(isset($post['id_raca']) && $post['id_raca'] != null)
-                $post['id_raca'] = $this->dec($post['id_raca']);
-            $post['nm_raca'] = strtolower($post['nm_raca']);
-            $servico = new RacaModel();
-            #xd($servico);
 
-            if($servico->filtrar(['nm_raca'=>$post['nm_raca']])){
-                $this->addMessage(['status'=>'DANGER','msg'=>'informações já cadastradas no banco de dados']);
-                $this->route('/raca');
+            foreach($post as $key => $value){
+                if($post[$key] == null){
+                    unset($post[$key]);
+                }
             }
+
+            if(isset($post['id_pet']) && $post['id_pet'] != null)
+                $post['id_pet'] = $this->dec($post['id_pet']);
+            $post['nm_pet'] = strtolower($post['nm_pet']);
+
+            unset($post['id_especie']);
+            unset($post['id_usuario']);
+
+            switch($post['flag_porte']){
+                case 'Pequeno':
+                    $post['flag_porte']='1';
+                    break;
+                case 'Médio':
+                    $post['flag_porte']='2';
+                    break;
+                case 'Grande':
+                    $post['flag_porte']='3';
+                    break;
+            }
+            
+            $servico = new PetModel();
+            #xd($servico);
 
             $bool = $servico->salvar($post);
 
             if($bool){
                 $this->addMessage(['status'=>'SUCCESS','msg'=>'Informações gravadas com sucesso.']);
                 #xd((new Sessions())->get_session_data('user'));
-                $this->route('/raca');
+                $this->route('/pet');
             }
         }else{
             $this->addMessage(['status'=>'WARNING','msg'=>'Informações não puderam ser gravadas.']);
-            $this->route('/raca');
+            $this->route('/pet');
         }
     }
 
@@ -110,4 +149,15 @@ class PetController extends  Controller
             echo false;
         }
     }
+
+    public function id_raca_pagination(){
+        $this->hasIdentify();
+        if($this->isPost()){
+
+            $this->data['racas'] = $this->getPost('data');
+            $this->data['selected']= $this->getPost('selected');
+            $this->loadView('id_raca_pagination');
+        }
+    }
+
 }
