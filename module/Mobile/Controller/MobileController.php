@@ -371,7 +371,8 @@ class MobileController extends Controller
             $post['id']= $this->dec($post['id']);
             $agenda  = new AgendaModel();
             $user_agenda = new UsuarioAgendaModel();
-
+            $cv = new CartaoVacinaModel();
+            $pet_cv= new PetCartaoModel();
             if($agenda->filtrar(['id_pet'=>$post['id']]) > 0){
                 /*Buscando todas as agendas relacionas ao pet*/
                 $data = $agenda->where(['id_pet'=>$post['id']],'id_agenda');
@@ -399,6 +400,25 @@ class MobileController extends Controller
 
                     }
                 }
+            }
+            if($pet_cv->filtrar(['id_pet'=>$post['id']])){
+                $data = $pet_cv->getById(['id_pet'=>$post['id']]);
+
+                if(isset($data[0])){
+                    $pet_cvs = $data;
+                }else{
+                    $pet_cvs[]= $data;
+                }
+
+                foreach($pet_cv as $item){
+                    $bool = $cv->exclui($item['id_cartao_vacina']);
+
+                    if($bool && is_array($bool)){
+                        xd($bool);
+                    }
+                }
+
+                $pet_cv->exclui(['id_pet'=>$post['id']]);
             }
 
             $pet = new PetModel();
