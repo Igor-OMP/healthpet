@@ -31,8 +31,8 @@
                     <td><?=$petshop['em_email'];?></td>
                     <td class="text-center"><button class="btn btn-default btn-rounded waves-effect waves-light m-t-10 btn-modal" data-info="<?=$this->enc($petshop['id_petshop'])?>">Detalhes</button></td>
                     <td class="text-center">
-                        <a href="<?=base_url('petshop/cadastrar/'.$this->enc($petshop['id_petshop']))?>" class="btn btn-warning">Editar</a>
-                        <button class="btn btn-danger btn-excluir" data-value="<?=$this->enc($petshop['id_petshop'])?>">Excluir</button>
+                        <a href="<?=base_url('petshop/cadastrar/'.$this->enc($petshop['id_petshop']))?>" class="btn btn-warning"><i class="md md-edit"></i></a>
+                        <button class="btn btn-danger btn-excluir" data-value="<?=$this->enc($petshop['id_petshop'])?>"><i class="md md-delete"></i></button>
                     </td>
 
                 </tr>

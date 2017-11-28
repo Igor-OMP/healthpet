@@ -40,8 +40,8 @@
                             <td><?=($pet['flag_porte'] =='1')?'Pequeno':(($pet['flag_porte']=='2')?'Médio':'Grande')?></td>
                          
                             <td class="text-center">
-                                <a href="<?=base_url('pet/cadastrar/'.$this->enc($pet['id_pet']))?>" class="btn btn-warning">Editar</a>
-                                <button href="#" class="btn btn-danger waves-effect waves-light btn-excluir" data-id="<?= $this->enc($pet['id_pet'])?>">Excluir</button>
+                                <a href="<?=base_url('pet/cadastrar/'.$this->enc($pet['id_pet']))?>" class="btn btn-warning"><i class="md md-edit"></i></a>
+                                <button href="#" class="btn btn-danger waves-effect waves-light btn-excluir" data-id="<?= $this->enc($pet['id_pet'])?>"><i class="md md-delete"></i></button>
                             </td>
 
                         </tr>

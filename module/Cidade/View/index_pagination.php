@@ -25,8 +25,8 @@
                         <tr>
                             <td><?=ucwords($cidade['nm_cidade'])?></td>
                             <td class="text-center">
-                                <a href="<?=base_url('cidade/cadastrar/'.$this->enc($cidade['id_cidade']))?>" class="btn btn-warning">Editar</a>
-                                <buttons href="#" class="btn btn-danger waves-effect waves-light btn-excluir" data-id="<?= $this->enc($cidade['id_cidade'])?>">Excluir</buttons>
+                                <a href="<?=base_url('cidade/cadastrar/'.$this->enc($cidade['id_cidade']))?>" class="btn btn-warning"><i class="md md-edit"></i></a>
+                                <button href="#" class="btn btn-danger waves-effect waves-light btn-excluir" data-id="<?= $this->enc($cidade['id_cidade'])?>"><i class="md md-delete"></i></button>
                             </td>
 
                         </tr>

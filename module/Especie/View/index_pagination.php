@@ -25,8 +25,8 @@
                         <tr>
                             <td><?=ucwords($especie['nm_especie'])?></td>
                             <td class="text-center">
-                                <a href="<?=base_url('especie/cadastrar/'.$this->enc($especie['id_especie']))?>" class="btn btn-warning">Editar</a>
-                                <button href="#" class="btn btn-danger waves-effect waves-light btn-excluir" data-id="<?= $this->enc($especie['id_especie'])?>">Excluir</button>
+                                <a href="<?=base_url('especie/cadastrar/'.$this->enc($especie['id_especie']))?>" class="btn btn-warning"><i class="md md-edit"></i></a>
+                                <button href="#" class="btn btn-danger waves-effect waves-light btn-excluir" data-id="<?= $this->enc($especie['id_especie'])?>"><i class="md md-delete"></i></button>
                             </td>
 
                         </tr>

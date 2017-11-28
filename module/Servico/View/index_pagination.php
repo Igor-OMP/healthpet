@@ -30,8 +30,8 @@
                                 echo (empty($serv['id_servico_pai']))?'Serviço Principal':ucwords($data['nm_servico']);
                                 ?></td>
                             <td class="text-center">
-                                <a href="<?=base_url('servico/cadastrar/'.$this->enc($serv['id_servico']))?>" class="btn btn-warning">Editar</a>
-                                <button href="#" class="btn btn-danger waves-effect waves-light btn-excluir" data-id="<?= $this->enc($serv['id_servico'])?>">Excluir</button>
+                                <a href="<?=base_url('servico/cadastrar/'.$this->enc($serv['id_servico']))?>" class="btn btn-warning"><i class="md md-edit"></i></a>
+                                <button href="#" class="btn btn-danger waves-effect waves-light btn-excluir" data-id="<?= $this->enc($serv['id_servico'])?>"><i class="md md-delete"></i></button>
                             </td>
 
                         </tr>

@@ -28,8 +28,8 @@
                             <td><?=ucwords($raca['nm_raca'])?></td>
                             <td><?=ucwords($data)?></td>
                             <td class="text-center">
-                                <a href="<?=base_url('raca/cadastrar/'.$this->enc($raca['id_raca']))?>" class="btn btn-warning">Editar</a>
-                                <button href="#" class="btn btn-danger waves-effect waves-light btn-excluir" data-id="<?= $this->enc($raca['id_raca'])?>">Excluir</button>
+                                <a href="<?=base_url('raca/cadastrar/'.$this->enc($raca['id_raca']))?>" class="btn btn-warning"><i class="md md-edit"></i></a>
+                                <button href="#" class="btn btn-danger waves-effect waves-light btn-excluir" data-id="<?= $this->enc($raca['id_raca'])?>"><i class="md md-delete"></i></button>
                             </td>
 
                         </tr>

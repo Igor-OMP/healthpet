@@ -27,10 +27,10 @@
                 <input type="submit" class="btn btn-primary col-md-12" value="Entrar">
                 <?php //echo password_hash("123456", PASSWORD_DEFAULT)."\n"; ?>
             </div>
-            <div class="form-group col-md-11 col-md-push-1">
-                <a href="<?=base_url('petshop/cadastrar_petshop')?>"style="color:#fff;"  class="text-left col-md-6">Cadastrar petshop</a>
+            <!--<div class="form-group col-md-11 col-md-push-1">
+                <a href="<?/*=base_url('petshop/cadastrar_petshop')*/?>"style="color:#fff;"  class="text-left col-md-6">Cadastrar petshop</a>
                 <a href="#"style="color:#fff;"  class="text-right col-md-6">Esqueci o login</a>
-            </div>
+            </div>-->
         </form>
 
     <?php else:?>

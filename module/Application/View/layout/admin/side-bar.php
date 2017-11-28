@@ -91,13 +91,13 @@ if(isset($_SESSION['user']))
     </div>
 
 
-    <div class="user-detail">
+    <!--<div class="user-detail">
         <div class="dropup">
             <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true">
                 <img src="/img/funcionarios/img_avatar.png" alt="user-img" class="img-circle">
                             <span class="user-info-span">
                                 <br>
-                                <h5 class="m-t-0 m-b-0"><?= utf8_encode(ucwords($user['nm_user'])) ?></h5>
+                                <h5 class="m-t-0 m-b-0"><?/*= utf8_encode(ucwords($user['nm_user'])) */?></h5>
                                 <p class="text-muted m-b-0">
                                     <small><i class="fa fa-circle text-success"></i> <span>Online</span></small>
                                 </p>
@@ -106,9 +106,9 @@ if(isset($_SESSION['user']))
             <ul class="dropdown-menu">
                 <li><a href="javascript:void(0)"><i class="md md-face-unlock"></i> Profile</a></li>
                 <li><a href="javascript:void(0)"><i class="md md-settings"></i><span>status</span></a></li>
-                <li><a href="<?=base_url('logout')?>"><i class="md md-settings-power"></i> Logout</a></li>
+                <li><a href="<?/*=base_url('logout')*/?>"><i class="md md-settings-power"></i> Logout</a></li>
             </ul>
         </div>
-    </div>
+    </div>-->
 </div>
 <!-- Left Sidebar End -->
