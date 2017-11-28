@@ -8,6 +8,15 @@
 <link rel="stylesheet" href="/assets/css/mobile/cad-user.css">
 <div class="container" id="cad-user">
     <div class="row">
+        <?php
+        /*MENSAGENS DO SISTEMA*/
+        if(isset($_SESSION['flash_message'])){
+
+            $this->render('layout/admin/messages',['msg'=>$_SESSION['flash_message']]);
+        }
+        ?>
+    </div>
+    <div class="row">
         <a href="/mobile" style="font-size: 3em;position: absolute;top:10px; left: 20px; color: #fff;"><i class="md md-keyboard-arrow-left"></i></a>
     </div>
     <h2 class="text-center">Cadastre-se</h2>

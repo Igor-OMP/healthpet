@@ -12,8 +12,8 @@ $servico =new ServicoModel();
 <?php
 
 
-#xd($cartoes);
-if(!isset($cartoes)){
+#xd(empty($cartoes[0]));
+if(!isset($cartoes) || empty($cartoes[0])){
     echo'<h4>Não existe registros cadastrados para esse pet.</h4>';
 }else {
     ?>
@@ -40,7 +40,7 @@ if(!isset($cartoes)){
                             ?>
                             <tr>
                                 <td><?= '<a href="" class="btn-modal" data-cartao="' . $this->enc($dados['id_cartao_vacina']) . '" >' . ucwords($servico->getNomeServicoById(['id_servico' => $dados['id_servico']])) . '</a>' ?></td>
-                                <td><?= date('d/m/y', strtotime($dados['dt_evento'])) ?></td>
+                                <td><?= date('d/m/y',strtotime($dados['dt_evento'])) ?></td>
                                 <td>
                                     <button class="btn btn-danger btn-excluir"
                                             data-agenda="<?= $this->enc($dados['id_cartao_vacina']) ?>"><i

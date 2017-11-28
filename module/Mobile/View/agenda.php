@@ -61,6 +61,8 @@
                 carregarEventos($("#id_pet").val());
             }
         });
+
+        $("#agenda-form").trigger("reset");
     });
     function carregarEventos(){
 

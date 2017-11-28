@@ -20,7 +20,7 @@
             <div class="modal-body">
                 <h3>Dados da Empresa</h3>
                 <p>Nome da Empresa: <?=ucwords($petshop['nm_petshop'])?></p>
-                <p>Email:<a href="maito:<?=$petshop['em_email']?>"><?=$petshop['em_email']?></a></p>
+                <p>Email:<a href="mailto:<?=$petshop['em_email']?>"><?=$petshop['em_email']?></a></p>
                 <p>Telefone: <a href="tel:<?=str_replace([" ","(",")"],["","",""],$petshop['nr_telefone'])?>"><?=$petshop['nr_telefone']?></a></p>
                 <hr>
                 <h3>Localização</h3>

@@ -53,7 +53,6 @@ if(isset($_SESSION['user']))
                     <ul class="list-unstyled">
                         <li><a href="<?=base_url('pet')?>" style="cursor: pointer">Visualizar</a></li><!--
                         <li><a href="#" style="cursor: pointer" id="">Agenda</a></li>-->
-                        <li><a href="#" style="cursor: pointer" id="">Histórico</a></li>
                     </ul>
                 </li>
 

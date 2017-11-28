@@ -213,15 +213,154 @@ class UsuarioController extends \Controller
 
         if(!empty($id)){
             $id['id']= $this->dec($id['id']);
+
+
             $servico = new UsuarioModel();
+            $pet = new PetModel();
+            $agenda = new AgendaModel();
+            $cv = new CartaoVacinaModel();
+            $pcv = new PetCartaoModel();
+            $user_agenda = new UsuarioAgendaModel();
+
+            $pets = $pet->getById(['id_usuario'=>$id['id']]);
+
+            /*EXCLUINDO TODOS OS CARTÕES DE VACINA*/
+            if($pets != null){
+                if(isset($pets[0])){
+                    foreach($pets as $p){
+                        $data = $pcv->getById(['id_pet'=>$p['id_pet']]);
+
+                        if($data != null ){
+                            if(isset($data[0])){
+                                foreach($data as $item){
+                                    $bool = $cv->exclui(['id_cartao_vacina'=>$item['id_cartao_vacina']]);
+
+                                    if(is_array($bool) && isset($bool['error_message'])){
+                                        $this->addFlashMessage(Controller::MSG_DANGER,$bool['error_message']);
+                                        echo false;
+                                    }
+                                }
+                            }else{
+                               $bool =  $cv->exclui(['id_cartao_vacina'=>$data['id_cartao_vacina']]);
+
+                                if(is_array($bool) && isset($bool['error_message'])){
+                                    $this->addFlashMessage(Controller::MSG_DANGER,$bool['error_message']);
+                                    echo false;
+                                }
+                            }
+
+                            $bool = $pcv->exclui(['id_pet'=>$p['id_pet']]);
+
+                            if(is_array($bool) && isset($bool['error_message'])){
+                                $this->addFlashMessage(Controller::MSG_DANGER,$bool['error_message']);
+                                echo false;
+                            }
+                        }
+                    }
+                }else{
+                    $data = $pcv->getById(['id_pet'=>$pets['id_pet']]);
+
+                    if($data != null ){
+                        if(isset($data[0])){
+                            foreach($data as $item){
+                                $bool = $cv->exclui(['id_cartao_vacina'=>$item['id_cartao_vacina']]);
+
+                                if(is_array($bool) && isset($bool['error_message'])){
+                                    $this->addFlashMessage(Controller::MSG_DANGER,$bool['error_message']);
+                                    echo false;
+                                }
+                            }
+                        }else{
+                           $bool =  $cv->exclui(['id_cartao_vacina'=>$data['id_cartao_vacina']]);
+
+                            if(is_array($bool) && isset($bool['error_message'])){
+                                $this->addFlashMessage(Controller::MSG_DANGER,$bool['error_message']);
+                                echo false;
+                            }
+                        }
+
+                        $bool = $pcv->exclui(['id_pet'=>$pets['id_pet']]);
+
+                        if(is_array($bool) && isset($bool['error_message'])){
+                            $this->addFlashMessage(Controller::MSG_DANGER,$bool['error_message']);
+                            echo false;
+                        }
+                    }
+                }
+            }/*END EXCLUSÃO CARTAO DE VACINAS */
+
+            /*INIT - EXCLUINDO AGENDA*/
+            $agenda_user = $user_agenda->getById(['id_usuario'=>$id['id']]);
+
+            if($agenda_user != null ){
+                if(isset($agenda_user[0])){
+                    foreach($agenda_user as $item){
+                        $bool = $agenda->excluir(['id_agenda'=>$$item['id_agenda']]);
+
+                        if(is_array($bool) && isset($bool['error_message'])){
+                            $this->addFlashMessage(Controller::MSG_DANGER,$bool['error_message']);
+                            echo false;
+                        }
+                    }
+                }else{
+                   $bool= $agenda->excluir(['id_agenda'=>$agenda_user['id_agenda']]);
+
+                    if(is_array($bool) && isset($bool['error_message'])){
+                        $this->addFlashMessage(Controller::MSG_DANGER,$bool['error_message']);
+                        echo false;
+                    }
+                }
+                $bool =  $user_agenda->exclui(['id_usuario'=>$id['id']]);
+
+                if(is_array($bool) && isset($bool['error_message'])){
+                    $this->addFlashMessage(Controller::MSG_DANGER,$bool['error_message']);
+                    echo false;
+                }
+            }/*END - EXCLUSÃO AGENDA*/
+
+
+            /*INIT  - REVERIFICAÇÃO DE AGENDA*/
+            if($pets != null){
+                if(isset($pets[0])){
+                    foreach($pets as $p){
+                       $bool = $agenda->excluir(['id_pet'=>$p['id_pet']]);
+
+                       if(is_array($bool) && isset($bool['error_message'])){
+                            $this->addFlashMessage(Controller::MSG_DANGER,$bool['error_message']);
+                            echo false;
+                        }
+                    }
+                }else{
+                    $bool = $agenda->excluir(['id_pet'=>$pets['id_pet']]);
+
+                    if(is_array($bool) && isset($bool['error_message'])){
+                        $this->addFlashMessage(Controller::MSG_DANGER,$bool['error_message']);
+                        echo false;
+                    }
+                }
+            }/*END - VERIFICAÇÃO DE AGENDA*/
+
+
+            /*INIT - EXCLUSÃO PET*/
+            if($pet->getById(['id_usuario'=>$id['id']])){
+                $bool = $pet->exclui(['id_usuario'=>$id['id']]);
+
+                if(is_array($bool) && isset($bool['error_message'])){
+                    $this->addFlashMessage(Controller::MSG_DANGER,$bool['error_message']);
+                    echo false;
+                }
+            }
+            /*END - EXCLUSÃO PET*/
+
             $bool = $servico->exclui(['id_usuario'=>$id['id']]);
-            if($bool){
+            if($bool && !is_array($bool)){
                 $this->addMessage(['status'=>'SUCCESS','msg'=>'Informações excluidas com sucesso']);
                 echo true;
             }
         }else{
-            $this->addMessage(['status'=>'DANGER','msg'=>'Informações não puderam ser excluídas.']);
-            echo false;
+                $this->addFlashMessage(Controller::MSG_DANGER,$bool['error_message']);
+                echo false;
+
         }
     }
 }

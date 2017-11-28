@@ -28,9 +28,9 @@
                         <td><?=strtolower($user['em_email'])?></td>
                         <td><?=$user['nr_tel']?></td>
                         <td class="text-center">
-                            <a href="<?=base_url('usuario/add-pets/'.$this->enc($user['id_usuario']))?>" class="btn btn-primary">Add Pets</a>
-                            <a href="<?=base_url('usuario/cadastrar/'.$this->enc($user['id_usuario']))?>" class="btn btn-warning">Editar</a>
-                            <button  title="Excluir" data-toggle="tooltip"  data-placement="top" href="#" class="btn btn-danger waves-effect waves-light btn-excluir" data-id="<?= $this->enc($user['id_usuario'])?>">Excluir</button>
+                            <a href="<?=base_url('usuario/add-pets/'.$this->enc($user['id_usuario']))?>" class="btn btn-primary"><i class="md md-add"></i>Pets</a>
+                            <a href="<?=base_url('usuario/cadastrar/'.$this->enc($user['id_usuario']))?>" class="btn btn-warning"><i class="md md-edit"></i></a>
+                            <button  title="Excluir" data-toggle="tooltip"  data-placement="top" href="#" class="btn btn-danger waves-effect waves-light btn-excluir" data-id="<?= $this->enc($user['id_usuario'])?>"><i class="md md-delete"></i></button>
                         </td>
 
                     </tr>

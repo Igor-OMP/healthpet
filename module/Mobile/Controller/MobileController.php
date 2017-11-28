@@ -71,9 +71,9 @@ class MobileController extends Controller
             $session->create_session('user_mob', $user, true);
             $session->set_session_id();
 
-            $this->route('/mobile');
+            $this->toRoute('/mobile');
         }else{
-            $this->route('/mobile');
+            $this->toRoute('/mobile');
         }
     }
 
@@ -91,6 +91,7 @@ class MobileController extends Controller
     public function verify_email(){
         if($this->isPost()){
             $post = $this->getPost();
+
             $post['em_email'] = strtolower($post['em_email']);
             $usuario = new UsuarioModel();
             $return =  $usuario->filtrar($post);
@@ -347,17 +348,19 @@ class MobileController extends Controller
                         $this->authCadUser(['em_email'=>$post['em_email'],'pw_pass'=>$post['pw_pass']]);
                     }
                 }else{
+                    $this->addFlashMessage(Controller::MSG_WARNING,'O formulário não pode ser validado.');
                     $this->toRoute('/mobile/cad-user');
                 }
             }else{
-                return false;
+                $this->addFlashMessage(Controller::MSG_WARNING,'Senhas não conferem');
+                $this->toRoute('/mobile/cad-user');
             }
 
         }else{
             $this->toRoute('/mobile/cad-user');
         }
-
-        return null;
+        $this->addFlashMessage(Controller::MSG_WARNING,'Nenhumam informação foi enviada');
+        $this->toRoute('/mobile/cad-user');
     }
 
     public function pet_delete(){
