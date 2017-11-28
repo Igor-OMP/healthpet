@@ -387,7 +387,7 @@ class MobileController extends Controller
                 }
                 /*Apagando agendas da tabela agenda*/
                 foreach($agendas as $item){
-                    $pilha['agenda'][]=$agenda->exclui($item);
+                    $pilha['agenda'][]=$agenda->excluir($item);
                 }
             }
 
