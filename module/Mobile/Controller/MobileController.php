@@ -383,11 +383,21 @@ class MobileController extends Controller
                 #xd($agendas);
                 /*Apagando agendas da tabela usuario_agenda*/
                 foreach($agendas as $item){
-                    $pilha['usuario_agenda'][]=$user_agenda->exclui($item);
+                    $bool=$user_agenda->exclui($item);
+
+                    if($bool && is_array($bool)){
+                        xd($bool);
+
+                    }
                 }
                 /*Apagando agendas da tabela agenda*/
                 foreach($agendas as $item){
-                    $pilha['agenda'][]=$agenda->excluir($item);
+                   $bool = $agenda->excluir($item);
+
+                    if($bool && is_array($bool)){
+                        xd($bool);
+
+                    }
                 }
             }
 
@@ -397,6 +407,8 @@ class MobileController extends Controller
             if($bool && !is_array($bool)){
                 echo $this->enc('success');
                 die;
+            }else{
+                xd($bool);
             }
         }
         echo false;
