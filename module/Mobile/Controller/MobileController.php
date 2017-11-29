@@ -299,7 +299,7 @@ class MobileController extends Controller
 
             $validate->setValidates($post,$validation);
             if($validate->validate()){
-                $pet = fabric('PetModel');
+                $pet = new PetModel();
 
                 if($this->isFiles('ft_pet')){
                     $url = $this->uploadFile($this->getFiles('ft_pet'),'public/img/avatar_pets/');
@@ -309,8 +309,11 @@ class MobileController extends Controller
 
                 unset($post['id_especie']);
                 $bool = $pet->salvar($post);
-                if($bool){
+                if($bool && !is_array($bool)){
+
                     $this->toRoute('/mobile');
+                }else{
+                    $this->toRoute('/mobile/cad-pet');
                 }
 
             }else{

@@ -14,7 +14,7 @@ $form->createForm()?>
                 <input type="hidden" name="id" id="id" value="<?=$id?>">
                 <div class="form-group row">
                     <div class="">
-                        <label for="nm_petshop">Nome PetShop:</label>
+                        <label for="nm_petshop">Nome Pet:</label>
                         <?= $form->get('nm_pet') ?>
                     </div>
                 </div>

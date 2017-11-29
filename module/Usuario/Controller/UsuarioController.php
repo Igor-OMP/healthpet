@@ -84,7 +84,7 @@ class UsuarioController extends \Controller
                $this->route('/usuario');
            }
 
-           $modelpet=fabric('PetModel');
+           $modelpet=new PetModel();
            foreach($posts as  $post){
                $post= json_decode($post);
 
@@ -106,9 +106,12 @@ class UsuarioController extends \Controller
                    'id_raca'=>$post->id_raca,
                    'dt_nasc'=> $this->converterDataHoraBrazil2BancoMySQL($post->dt_nasc),
                    'flag_porte'=>$post->flag_porte,
-                   'ft_pet'=>$this->salvarBase64ToImg($post->nm_pet,$post->ft_pet,'public/img/avatar_pets/')
 
                ];
+
+               if(isset($post['ft_pet'])){
+                   $obj['ft_pet']=$this->salvarBase64ToImg($post->nm_pet,$post->ft_pet,'public/img/avatar_pets/');
+               }
 
                $bool = $modelpet->salvar($obj);
            }

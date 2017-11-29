@@ -8,4 +8,5 @@ data/cache/*
 public/assets/cache/*
 public/img/*
 Documentacao/
+data/logs/control.log
 vendor/
