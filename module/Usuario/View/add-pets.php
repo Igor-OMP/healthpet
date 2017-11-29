@@ -159,7 +159,7 @@ $form->createForm()?>
     $("#btn-gravar").click(function(e){
 
         e.preventDefault();
-        var array = new Array();
+        var array = [];
         var count = 0;
 
         /*init messege*/
@@ -195,10 +195,11 @@ $form->createForm()?>
                         },
                         success: function(data){
                             console.log(typeof data);
-                            if(data == '1'){
+                            if(data == '<?=$this->enc('success')?>'){
                                 window.location.href ='/usuario';
                             }else{
                                 console.log(data);
+                                return false;
                             }
                         }
                     });

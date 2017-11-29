@@ -4,9 +4,8 @@
 .idea/*
 /nbproject/private/
 nbproject/*
-data/cache/*
+data/*
 public/assets/cache/*
 public/img/*
 Documentacao/
-data/logs/control.log
 vendor/

@@ -76,6 +76,7 @@ class UsuarioController extends \Controller
 
     public function write_pets(){
         $this->hasIdentify();
+        $bool= '';
        try{
            $posts = $this->getPost('array');
 
@@ -109,18 +110,22 @@ class UsuarioController extends \Controller
 
                ];
 
-               if(isset($post['ft_pet'])){
-                   $obj['ft_pet']=$this->salvarBase64ToImg($post->nm_pet,$post->ft_pet,'public/img/avatar_pets/');
+               if(isset($post->ft_pet)){
+                   $obj['ft_pet']= $this->salvarBase64ToImg($post->nm_pet,$post->ft_pet,'public/img/avatar_pets/');
                }
-
+               
                $bool = $modelpet->salvar($obj);
            }
 
-           if($bool != null)
-               echo true;
+           if($bool && !is_array($bool)){
+               echo $this->enc('success');
+           }else{
+               echo json_encode($bool);
+           }
+
 
        }catch (Exception $e){
-            echo false;
+            echo json_encode($e->getMessage());
        }
 
 
@@ -359,11 +364,11 @@ class UsuarioController extends \Controller
             if($bool && !is_array($bool)){
                 $this->addMessage(['status'=>'SUCCESS','msg'=>'Informações excluidas com sucesso']);
                 echo true;
-            }
-        }else{
+            }else{
                 $this->addFlashMessage(Controller::MSG_DANGER,$bool['error_message']);
                 echo false;
 
+            }
         }
     }
 }
