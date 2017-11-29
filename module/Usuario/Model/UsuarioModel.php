@@ -47,6 +47,11 @@ class UsuarioModel extends  \Model
         $result = parent::where($this->table,$post,$return);
         return $result['nm_usuario'];
     }
+    public function getUsuarioByEmail($post,$return =null){
+        $result = parent::where($this->table,$post,$return);
+        return $result;
+    }
+
     public function getById($id){
 
         return parent::buscarModel($this->table,$id);

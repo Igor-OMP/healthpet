@@ -6,6 +6,9 @@
  * Date: 03/12/2016
  * Time: 22:39
  */
+use Monolog\Logger as Logger;
+use Monolog\Handler\StreamHandler as StreamHandler;
+use Monolog\Handler\FirePHPHandler as FirePHPHandler;
 class Helpers
 {
     /**
@@ -43,6 +46,18 @@ class Helpers
         } else {
             return NULL;
         }
+    }
+
+    public static function logger($info){
+
+        if($info != '/favicon.ico'){
+            $log = new Logger('name');
+            $log->pushHandler(new StreamHandler(BASE_PATH.'data'.DS.'logs'.DS.'control.log', Logger::INFO));
+            $log->pushHandler(new FirePHPHandler());
+            // add records to the log
+            $log->info($info);
+        }
+
     }
 
     public static function textLimit($txt){

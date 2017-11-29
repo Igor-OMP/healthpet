@@ -23,7 +23,7 @@ class Core
             $modules = Config::getModules();
             $router = Config::getRouters();
             #if (!strstr($url, 'arquivos')) {
-
+            Helpers::logger($url);
 
             $params = array();
             if (!empty($url) && $url != '/') {

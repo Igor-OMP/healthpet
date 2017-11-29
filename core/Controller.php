@@ -7,6 +7,7 @@
  * Time: 21:40
  */
 
+use PHPMailer\PHPMailer\PHPMailer as PhpMailer;
 
 abstract class Controller
 {
@@ -122,6 +123,7 @@ abstract class Controller
 
     public function toRoute($url = null, $params=null)
     {
+
         if($params !=null){
             extract($params);
         }
@@ -277,6 +279,18 @@ abstract class Controller
         $alert=[
           'status'=>$status,
           'msg'=>$msg
+        ];
+        $session = new Sessions();
+        $session->set_session_data('flash_message',['alert'=>$alert]);
+
+    }
+
+    public function addFlashMobMessage($status= Controller::MSG_SUCCESS,$msg = null )
+    {
+
+        $alert=[
+            'status'=>$status,
+            'msg'=>$msg
         ];
         $session = new Sessions();
         $session->set_session_data('flash_message',['alert'=>$alert]);
@@ -711,6 +725,77 @@ abstract class Controller
         } else {
             return '';
         }
+    }
+
+    public function send_email($email,$nome,$id){
+
+        $mail = new PHPMailer();
+       try{
+           $cheksum =base64_encode(sha1('InitCriptografia')).
+                     base64_encode(md5($email."healthpet_recuperacao_senha_".date("d/m/y",strtotime("now")))).
+                     base64_encode(sha1('EndCriptografia')).
+                     base64_encode(sha1('Nome:').$email);
+
+           $msg =
+               'Para que você possa redefinir sua senha acesse o link abaixo:'.'<br>'.
+               "http://dev.health.br/mobile/redefinir?t=".$cheksum."&e=".base64_encode($email)."&u=".base64_encode($nome)."&i="
+                        .base64_encode($this->enc($id));
+
+           $assunto = addslashes('Redefinir Senha Health Pet');
+
+           $para = $email;
+
+           $corpo= "Nome:".$nome."- Email:".$email;
+           $cabecalho= "From:Health Pet Support"."\r\n".
+               "Replay-to:".$email."\r\n".
+               "X-Mailer: PHP/". phpversion();
+           /*
+           mail($para,$assunto,$corpo,$cabecalho);*/
+
+           // Define os dados do servidor e tipo de conexão
+
+           $mail->SMTPDebug = 2;
+           $mail->IsSMTP();// Define que a mensagem será enviada por SMTP
+           $mail->Host ="smtp.gmail.com";//Endereço do servidor SMTP
+           $mail->Port  = 587;
+           $mail->SMTPAuth = true;
+           $mail->SMTPSecure =' tls';
+           $mail->Username= "health.pet.projeto@gmail.com";// Usuário do  servidor SMTP
+           $mail->Password ="projeto123";
+
+           // Define o remetente
+           $mail->From = 'support@healthpet.com';
+           $mail->FromName = 'Health Pet Support';
+
+           // Define Destinatários
+           $mail->AddAddress($para,$nome);
+           // Define dados técnicos da mensagem
+           $mail->IsHTML(true);
+
+           // Define a mensagem ( Texto e Assunto)
+           $mail->Subject = $assunto;
+           $mail->Body = $msg;
+           $mail->AltBody =$corpo;
+
+           // Define os anexos (opcional)
+           // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+           //$mail->AddAttachment("c:/temp/documento.pdf", "novo_nome.pdf");  // Insere um anexo
+
+           // Envia o e-mail
+           $enviado = $mail->Send();
+
+
+           // Limpa os destinatários e os anexos
+           $mail->ClearAllRecipients();
+           $mail->ClearAttachments();
+           return true;
+       }catch (\PHPMailer\PHPMailer\Exception $e){
+           echo 'Mensagem não pode ser enviada';
+           echo 'Mailer Error: '.$mail->ErrorInfo;
+           return false;
+       }
+
+
     }
 
 } 

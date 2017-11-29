@@ -262,7 +262,7 @@ class MobileController extends Controller
             $bool = $usuario_agenda->exclui(['id_agenda'=>$post['id']]);
             if($bool){
                 $agenda = new AgendaModel();
-                $bool = $agenda->exclui(['id_agenda'=>$post['id']]);
+                $bool = $agenda->excluir(['id_agenda'=>$post['id']]);
 
                 if($bool){
                     echo $this->enc('success');
@@ -499,6 +499,28 @@ class MobileController extends Controller
         }
     }
 
+    public function card_vacina_delete(){
+        if($this->hasMobileSession() && $this->isPost()){
+            $post = $this->getPost();
+            $post['id']= $this->dec($post['id']);
+
+            $cv = new CartaoVacinaModel();
+            $pet_cv = new PetCartaoModel();
+
+            $bool = $pet_cv->exclui(['id_cartao_vacina'=>$post['id']]);
+
+            if($bool && !is_array($bool)){
+                $bool = $cv->exclui(['id_cartao_vacina'=>$post['id']]);
+                if($bool && !is_array($bool)){
+                    echo $this->enc('success');
+                }else{
+                    echo json_encode($bool);
+                }
+            }else{
+                echo json_encode($bool);
+            }
+        }
+    }
 
     public function modal_card_vacina(){
         $this->hasMobileIdentify();
@@ -514,4 +536,102 @@ class MobileController extends Controller
             echo false;
         }
     }
+
+    public function recuperar_senha(){
+      $this->loadMobTemplate('recuperar-senha');
+
+    }
+
+    public function request_token(){
+        if($this->isPost()){
+            $post = $this->getPost();
+            $usuario = new UsuarioModel();
+
+            if($usuario->filtrar(['em_email'=>$post['em_email']]) > 0){
+                $data = $usuario->getUsuarioByEmail($post);
+
+                #x($this->send_email($data['em_email'],$data['nm_usuario'],$data['id_usuario']));
+
+               if($this->send_email($data['em_email'],$data['nm_usuario'],$data['id_usuario'])){
+
+                   $this->addFlashMobMessage(Controller::MSG_SUCCESS,"email para redefinir a senha foi encaminhado.");
+                   $this->toRoute('mobile');
+               }else{
+                   $this->addFlashMobMessage(Controller::MSG_WARNING,"não foi possível enviar o email");
+                   $this->toRoute('mobile/recuperar-senha');
+               }
+            }else{
+                $this->addFlashMobMessage(Controller::MSG_WARNING,"não existe email cadastrado");
+                $this->toRoute('mobile/recuperar-senha');
+            }
+
+        }
+        $this->toRoute('mobile/recuperar-senha');
+    }
+
+
+    public function redefinir(){
+
+        if($this->getRequest()){
+
+            $data =$this->getRequest();
+            $token = $data['t'];
+            $email =base64_decode($data['e']);
+            $nome = base64_decode($data['u']);
+            $id =$this->getRequest('i');
+
+
+            $checksum = base64_encode(sha1('InitCriptografia')).
+                base64_encode(md5($email."healthpet_recuperacao_senha_".date("d/m/y",strtotime("now")))).
+                base64_encode(sha1('EndCriptografia')).
+                base64_encode(sha1('Nome:').$email);
+
+            if($token == $checksum){
+                $this->toRoute('mobile/redefinir-senha?token='.$token."&u=".base64_encode($nome)."&e=".base64_encode($email).'&i='.$id);
+            }else{
+                Controller::error404();
+            }
+        }
+    }
+
+   public function redefinir_senha(){
+       $token = $this->getRequest('token');
+       $user = base64_decode($this->getRequest('u'));
+       $email = base64_decode($this->getRequest('e'));
+       $id = base64_decode($this->getRequest('i'));
+
+       if($token && $user && $email){
+           $data = [
+             'token'=>$token,
+              'user'=>$user,
+              'email'=>$email,
+               'id'=>$id
+           ];
+           $this->loadMobTemplate('redefinir-senha',$data);
+       }else{
+           Controller::error404();
+       }
+   }
+
+    public function update_senha(){
+        if($this->isPost()){
+            $post = $this->getPost();
+
+            if(isset($post['id_usuario'])){
+                $user = new UsuarioModel();
+
+                if($post['conf_senha'] == $post["pw_senha"]){
+                    $user->salvar([
+                        'id_usuario'=>$this->dec($post['id_usuario']),
+                        'pw_pass'=>md5($post['pw_senha'])
+                    ]);
+                    $this->addFlashMobMessage(Controller::MSG_SUCCESS,'Senha atualizada com sucesso');
+                    $this->toRoute('/mobile');
+                }else{
+                    $this->route($_SERVER['REQUEST_URI']);
+                }
+            }
+        }
+    }
+
 }
