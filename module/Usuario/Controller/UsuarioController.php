@@ -113,7 +113,7 @@ class UsuarioController extends \Controller
                if(isset($post->ft_pet)){
                    $obj['ft_pet']= $this->salvarBase64ToImg($post->nm_pet,$post->ft_pet,'public/img/avatar_pets/');
                }
-               
+
                $bool = $modelpet->salvar($obj);
            }
 
