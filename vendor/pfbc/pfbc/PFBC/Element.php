@@ -13,18 +13,18 @@ abstract class Element extends Base {
 	protected $prefillAfterValidation = 1;
 
 	public function __construct($label, $name, array $properties = null) {
-		$configuration = array(
+		$configuration = [
 			"label" => $label,
 			"name" => $name,
 			"id"=> $name
-
-		);
+		];
 
 		/*Merge any properties provided with an associative array containing the label
 		and name properties.*/
 		if(is_array($properties))
+
 			$configuration = array_merge($configuration, $properties);
-		
+
 		$this->configure($configuration);
 	}
 

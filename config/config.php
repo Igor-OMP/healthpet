@@ -21,9 +21,6 @@ global $tipo;
 if (ENVIRONMENT == 'development') {
 
     $config = [
-        /*'DNS' => "mysql:host=mysql.assejus.org.br;dbname=assejus;",
-        'DBUSER' => "assejus",
-        'DBPASS' => "Idea457",*/
         'DNS'=>"mysql:host=localhost;dbname=bdhealthpet;",
         'DBUSER'=>"root",
         'DBPASS'=>"mysql",

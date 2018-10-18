@@ -15,11 +15,11 @@
         <form action="<?= $this->redirect(['controller'=>'Login','action'=>'autenticar'])?>" class="form-horizontal m-t-20" method="POST">
 
             <div class="form-group col-md-11 col-md-push-1">
-                <input type="text" class="form-control" name = "login" required placeholder="Login">
+                <input type="text" class="form-control" name = "login" value="admin@admin.com" required placeholder="Login">
                 <i class="md md-account-circle form-control-feedback l-h-34"></i>
             </div>
             <div class="form-group col-md-11 col-md-push-1">
-                <input type="password" class="form-control"  name ="senha"  required placeholder="Password">
+                <input type="password" class="form-control"  name ="senha" value="123456"  required placeholder="Password">
                 <i class="md md-vpn-key form-control-feedback l-h-34"></i>
 
             </div>

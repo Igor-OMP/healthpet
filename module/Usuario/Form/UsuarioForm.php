@@ -6,6 +6,7 @@
  * Date: 20/10/2017
  * Time: 12:14
  */
+
 class UsuarioForm extends FormAbstract
 {
     protected $form;
@@ -13,7 +14,10 @@ class UsuarioForm extends FormAbstract
     public function __construct($id='usuario_form')
     {
         $this->form = new FormBuilder($id);
-        $this->form->configure(array("prevent" => array("bootstrap", "jQuery"),'action'=>BASE_URL.'usuario/salvar'));
+        $this->form->configure([
+                "prevent" => array("bootstrap", "jQuery"),
+        ]);
+
         $this->form->hidden('id_usuario');
         $this->form->text('Nome:','nm_usuario',['placeholder'=>'Escreva seu nome aqui','requided'=>1,'class'=>'form-control']);
         $this->form->email('Email:','em_email',['placeholder'=>'Digite o email aqui.','requided'=>1,'class'=>'form-control']);

@@ -14,6 +14,7 @@ class Sessions {
     }
 
     public function init_session(){
+        echo "init";
         session_start();
     }
 

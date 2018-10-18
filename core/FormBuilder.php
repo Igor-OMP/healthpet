@@ -44,7 +44,7 @@ class FormBuilder extends \PFBC\Form
      * @return mixed
      */
     public function text($label, $name=null, $properties=[]){
-        $element = new PFBC\Element\Textbox($label,$name,$properties);
+        $element = new \PFBC\Element\Textbox($label,$name,$properties);
 
        if($name == null)
            $name = $this->sufix.count($this->elements);
@@ -61,8 +61,8 @@ class FormBuilder extends \PFBC\Form
      * @return mixed
      */
     public function hidden($name=null,$value =null,$properties=[]){
-        $element = new PFBC\Element\Hidden($name,$value,$properties);
 
+        $element = new \PFBC\Element\Hidden($name,$value,$properties);
         if($name == null)
             $name = $this->sufix.count($this->elements);
 
@@ -78,7 +78,7 @@ class FormBuilder extends \PFBC\Form
      * @return mixed
      */
     public function email($label, $name=null, $properties=[]){
-        $element = new PFBC\Element\Email($label,$name,$properties);
+        $element = new \PFBC\Element\Email($label,$name,$properties);
         if($name == null)
             $name = $this->sufix.count($this->elements);
 
@@ -93,7 +93,7 @@ class FormBuilder extends \PFBC\Form
      * @return mixed
      */
     public function date($label, $name=null, $properties=[]){
-        $element = new PFBC\Element\Date($label,$name,$properties);
+        $element = new \PFBC\Element\Date($label,$name,$properties);
         if($name == null)
             $name = $this->sufix.count($this->elements);
 
@@ -108,7 +108,7 @@ class FormBuilder extends \PFBC\Form
      * @return mixed
      */
     public function datetime($label, $name=null, $properties=[]){
-        $element = new PFBC\Element\DateTime($label,$name,$properties);
+        $element = new \PFBC\Element\DateTime($label,$name,$properties);
         if($name == null)
             $name = $this->sufix.count($this->elements);
 
@@ -123,7 +123,7 @@ class FormBuilder extends \PFBC\Form
      * @return mixed
      */
     public function password($label, $name=null, $properties=[]){
-        $element = new PFBC\Element\Password($label,$name,$properties);
+        $element = new \PFBC\Element\Password($label,$name,$properties);
         if($name == null)
             $name = $this->sufix.count($this->elements);
 
@@ -131,7 +131,7 @@ class FormBuilder extends \PFBC\Form
         return $this->elements[$name];
     }
     public function telefone($label, $name=null, $properties=[]){
-        $element = new PFBC\Element\Phone($label,$name,$properties);
+        $element = new \PFBC\Element\Phone($label,$name,$properties);
         if($name == null)
             $name = $this->sufix.count($this->elements);
 
@@ -172,7 +172,7 @@ class FormBuilder extends \PFBC\Form
             }
         }
 
-        $element = new PFBC\Element\Checkbox("",$name,$option,$properties);
+        $element = new \PFBC\Element\Checkbox("",$name,$option,$properties);
         if($name == null)
             $name = $this->sufix.count($this->elements);
 
@@ -218,7 +218,7 @@ class FormBuilder extends \PFBC\Form
 
 
         #xd($option);
-        $element = new PFBC\Element\Select($label,$name,$option,$properties);
+        $element = new \PFBC\Element\Select($label,$name,$option,$properties);
         if($name == null)
             $name = $this->sufix.count($this->elements);
 
@@ -262,7 +262,7 @@ class FormBuilder extends \PFBC\Form
             }
         }
 
-        $element = new PFBC\Element\Radio($label,$name,$option,$properties);
+        $element = new \PFBC\Element\Radio($label,$name,$option,$properties);
         if($name == null)
             $name = $this->sufix.count($this->elements);
 
@@ -280,7 +280,7 @@ class FormBuilder extends \PFBC\Form
     public function textArea($label, $name=null, $service = null, $method ='All'){
 
         $option = [];
-        $element = new PFBC\Element\Textarea($label,$name,$option);
+        $element = new \PFBC\Element\Textarea($label,$name,$option);
         if($name == null)
             $name = $this->sufix.count($this->elements);
 
@@ -295,7 +295,7 @@ class FormBuilder extends \PFBC\Form
      * @return mixed
      */
     public function button($label, $name=null, $properties=[]){
-        $element = new PFBC\Element\Button($label,$name,$properties);
+        $element = new \PFBC\Element\Button($label,$name,$properties);
         if($name == null)
             $name = $this->sufix.count($this->elements);
 

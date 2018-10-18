@@ -1,5 +1,6 @@
 <?php
-
+global $env;
+$env = "production";
 chdir(dirname(__DIR__));
 ## Arquivo para Debug  - Igor  Oliveira
 require 'infra/debug.php';
@@ -24,6 +25,13 @@ if(empty($debug)){
 
 date_default_timezone_set('America/Sao_Paulo');
 
+if($env =="production"){
+    error_reporting(0);
+    ini_set("display_erros",0);
+}else{
+    error_reporting(E_ALL);
+    ini_set("display_erros",1);
+}
 
 /**
  * Default messages namespace

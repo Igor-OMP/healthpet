@@ -26,6 +26,7 @@ class LoginController extends \Controller
     {
 
         try {
+
             $post = $this->getPost();
             $post['senha'] = md5($post['senha']);
             $loginModel = new LoginModel();

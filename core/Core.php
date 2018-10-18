@@ -19,11 +19,12 @@ class Core
         require_once 'core/Controller.php';
         try {
 
-            $url = '/' . ((isset($_GET['q'])) ? $_GET['q'] : '');
+
+
+            $url = empty($_SERVER['PATH_INFO'])?'/':$_SERVER['PATH_INFO'];
             $modules = Config::getModules();
             $router = Config::getRouters();
             #if (!strstr($url, 'arquivos')) {
-            Helpers::logger($url);
 
             $params = array();
             if (!empty($url) && $url != '/') {
